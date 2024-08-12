@@ -105,6 +105,7 @@ class TwilioPhoneConversation(AbstractPhoneConversation[TwilioOutputDevice]):
             if response == TwilioPhoneConversationWebsocketAction.CLOSE_WEBSOCKET:
                 break
         await ws.close(code=1000, reason=None)
+        logger.error("*** terminating websocket after it went inactive")
         await self.terminate()
 
     async def _wait_for_twilio_start(self, ws: WebSocket):
